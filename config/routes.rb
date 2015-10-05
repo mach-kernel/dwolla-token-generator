@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   root 'token#home'
   post '/token/generate', to: 'token#generate'
+  get '/redirect', to: 'token#redirect'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
