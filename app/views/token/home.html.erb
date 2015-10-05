@@ -1,0 +1,112 @@
+<h1 class="page-header">Dwolla Token Generator</h1>
+<h4>Generate an authorization token using OAuth for the Dwolla API.</h4>
+<%= form_for(:auth, :url => {:controller => 'token', :action => 'generate'}) do |f| %>
+<div class="row">
+	<div class="col-md-12">
+		<h3 class="page-header">Step 1: Select Credentials</h3>
+		<div class="text-center">
+			<h4>I want to...</h4>
+			<div id="example_creds">
+				<a class="btn btn-primary" id="user_creds_button">Use my own credentials</a>
+				<br /><br />
+				<strong>&mdash; or &mdash;</strong>
+				<br /><br />
+				<a class="btn btn-primary" id="example_app_button" href="#step_2">Use the Dwolla example app credentials</a>
+			</div>
+			<div id="user_creds">
+				<a class="btn btn-primary" id="back_creds_button">Go Back</a>
+				<br /> <br />
+				<div class="col-md-6">
+					<%= f.text_field :user_key, :tabindex => 1, class: 'form-control', :placeholder => 'Application Key' %>
+				</div>
+				<div class="col-md-6">
+					<%= f.text_field :user_key, :tabindex => 1, class: 'form-control', :placeholder => 'Application Secret' %>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-12">
+		<h3 class="page-header" id="step_2">Step 2: Select Permissions</h3>
+		<table class="table table-striped table-hover table-bordered" id="scope_table">
+			<thead>
+				<tr>
+					<th></th>
+					<th>Scope</th>
+					<th>Description</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><%= f.check_box :Send, { checked: 0 } %></td>
+					<td>Send</td>
+					<td>Send money from the authenticated account</td>
+				</tr>
+				<tr>
+					<td><%= f.check_box :Scheduled, { checked: 0 } %></td>
+					<td>Scheduled</td>
+					<td>Allow scheduling one-time and recurring payments</td>
+				</tr>
+				<tr>
+					<td><%= f.check_box :Request, { checked: 0 } %></td>
+					<td>Request</td>
+					<td>Initiate a money request, originating from the authenticated account. View, cancel, and fulfill existing requests</td>
+				</tr>
+				<tr>
+					<td><%= f.check_box :AccountInfoFull, { checked: 0 } %></td>
+					<td>AccountInfoFull</td>
+					<td>Detailed information about the authenticated account</td>
+				</tr>
+				<tr>
+					<td><%= f.check_box :Contacts, { checked: 0 } %></td>
+					<td>Contacts</td>
+					<td>Contacts of the authenticated account</td>
+				</tr>
+				<tr>
+					<td><%= f.check_box :Transactions, { checked: 0 } %></td>
+					<td>Transactions</td>
+					<td>List and retrieve user's transactions</td>
+				</tr>
+				<tr>
+					<td><%= f.check_box :Balance, { checked: 0 } %></td>
+					<td>Balance</td>
+					<td>Dwolla balance of the authenticated account</td>
+				</tr>
+				<tr>
+					<td><%= f.check_box :Funding, { checked: 0 } %></td>
+					<td>Funding</td>
+					<td>View, add, verify funding sources (i.e. bank accounts) linked to the authenticated account. Initiate deposits from and withdrawals to funding sources</td>
+				</tr>
+				<tr>
+					<td><%= f.check_box :ManageAccount, { checked: 0 } %></td>
+					<td>ManageAccount</td>
+					<td>Manage the authenticated user's account settings</td>
+				</tr>
+				<tr>
+					<td><%= f.check_box :ManageCustomers, { checked: 0 } %></td>
+					<td>ManageCustomers <em>(beta)</em></td>
+					<td>Manage customer records associated with the authenticated user's account</td>
+				</tr>
+			</tbody>
+		</table>
+		<a class="btn btn-default" id="all_scopes_button">Select all</a>
+		<a class="btn btn-default" id="no_scopes_button">Clear</a>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-12">
+		<h3 class="page-header">Step 3: Generate Token</h3>
+		<div class="text-center">
+			<h4>Generate token for which environment?</h4>
+			<br />
+			<div class="col-md-6">
+				<%= f.submit 'Production', class: 'btn btn-success btn-block' %>
+			</div>
+			<div class="col-md-6">
+	    		<%= f.submit 'UAT/Sandbox', class: 'btn btn-warning btn-block' %>
+	    	</div>
+    	</div>
+	</div>
+</div>
+<% end %>

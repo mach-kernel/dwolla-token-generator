@@ -1,14 +1,19 @@
-<!DOCTYPE html>
 <html>
-<head>
-  <title>DwollaTokenGenerator</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-
-<%= yield %>
-
-</body>
+  <head>
+    <title><%= yield(:title) %></title>
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootswatch/3.0.0/spacelab/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js" type="text/javascript"></script>
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js" type="text/javascript"></script>
+    <%= stylesheet_link_tag "application" %>
+    <%= javascript_include_tag "application" %>
+    <%= javascript_include_tag "token" %>
+  </head>
+  <body>
+  	<div class="container">
+		<%= render partial: "layouts/bs_alerts", flash: flash %>
+		<%= yield %>
+		<%= render partial: "layouts/footer" %>
+	</div>
+  </body>
 </html>
