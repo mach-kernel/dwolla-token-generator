@@ -30,7 +30,8 @@ class TokenController < ApplicationController
       :client_secret => cred ? dw_env ? Rails.application.secrets.sec_prod : Rails.application.secrets.sec_uat : params[:auth][:user_secret],
       :scope => scope[0..scope.length - 2],
       :response_type => 'code',
-      :redirect_uri => Rails.application.secrets.redirect
+      :redirect_uri => Rails.application.secrets.redirect,
+      :dwolla_landing => 'login'
     }
 
     redirect_to(session[:base_url] + '/authenticate?' + session[:req].to_query)
