@@ -48,4 +48,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 # REST support
 gem 'rest-client', '~> 1.8.0'
 
-gem 'protected_attributes'
+# Prettify responses
+gem 'redcarpet', '~> 3.3.3'
+gem 'rouge', '~> 1.10.1'

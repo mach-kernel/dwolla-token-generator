@@ -1,9 +1,24 @@
 <h1 class="page-header">Dwolla Token Generator</h1>
 <h4>Generate an authorization token using OAuth for the Dwolla API.</h4>
+
+<% if @token %>
+<div class="row" id="token_box">
+	<div class="col-md-1"></div>
+	<div class="col-md-10">
+		<h3 class="page-header">Your access key set</h3>
+		<p><%== Parser.md.render(@token).html_safe %></p>
+		<div class="text-center">
+			<a class="btn btn-primary" id="again_button">Again?</a>
+		</div>
+	</div>
+	<div class="col-md-1"></div>
+</div>
+<% end %>
+
 <%= form_for(:auth, :url => {:controller => 'token', :action => 'generate'}) do |f| %>
 <div class="row">
 	<div class="col-md-12">
-		<h3 class="page-header">Step 1: Select Credentials</h3>
+		<h3 class="page-header" id="step_1">Step 1: Select Credentials</h3>
 		<div class="text-center">
 			<h4>I want to...</h4>
 			<div id="example_creds">
@@ -104,9 +119,9 @@
 				<%= f.submit 'Production', class: 'btn btn-success btn-block' %>
 			</div>
 			<div class="col-md-6">
-	    		<%= f.submit 'UAT/Sandbox', class: 'btn btn-warning btn-block' %>
-	    	</div>
-    	</div>
+				<%= f.submit 'UAT/Sandbox', class: 'btn btn-warning btn-block' %>
+			</div>
+		</div>
 	</div>
 </div>
 <% end %>

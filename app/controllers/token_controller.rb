@@ -2,55 +2,55 @@ require 'rest-client'
 
 class TokenController < ApplicationController
 
-  cattr_accessor :dw_env, :cred, :base_url, :req, :auth
-
   def home
-  	reset_session
+  	if session.key?(:token)
+  		@token = session[:token]
+  		reset_session
+  	end
   end
 
   def generate
-  	unless ['Production', 'UAT/Sandbox'].include? params[:commit] 
-  		redirect_to '/'
-  		flash[:error] = 'Something went wrong. Please try again?'
-  	end
+    unless ['Production', 'UAT/Sandbox'].include? params[:commit]
+      redirect_to '/'
+      flash[:error] = 'Something went wrong. Please try again?'
+    end
 
-  	p params
+    dw_env = params[:commit] == 'Production'
+    cred = params[:auth][:user_key].empty? || params[:auth][:user_secret].empty?
+    session[:base_url] = "https://#{dw_env ? 'dwolla.com' : 'uat.dwolla.com'}/oauth/v2"
 
-  	@@dw_env = params[:commit] == 'Production'
-  	@@cred = params[:auth][:user_key].empty? || params[:auth][:user_secret].empty?
+    scope = ""
 
-  	@@base_url = "https://#{dw_env ? 'dwolla.com' : 'uat.dwolla.com'}/oauth/v2"
+    params[:auth].each do |k, v|
+      scope = scope + k + '|' if v == '1'
+    end
 
-  	scope = ""
+    session[:req] = {
+      :client_id => cred ? Rails.application.secrets.key_uat : params[:auth][:user_key],
+      :client_secret => cred ? Rails.application.secrets.sec_uat : params[:auth][:user_secret],
+      :scope => scope[0..scope.length - 2],
+      :response_type => 'code',
+      :redirect_uri => Rails.application.secrets.redirect
+    }
 
-  	params[:auth].each do |k, v|
-  		scope = scope + k + '?' if v == 1
-  	end
-
-  	@@req = {
-  		:client_id => cred ? Rails.application.secrets.key_uat : params[:auth][:user_key],
-  		:client_secret => cred ? Rails.application.secrets.sec_uat : params[:auth][:user_secret],
-  		:scope => scope,
-  		:redirect_uri => 'http://localhost:3000/redirect'
-  	}
-  	p @@base_url + '/authenticate?' + @@req.to_query
-
-  	redirect_to(@@base_url + '/authenticate?' + @@req.to_query)
+    redirect_to(session[:base_url] + '/authenticate?' + session[:req].to_query)
   end
 
   def redirect
-  	unless params.key?('code')
-  		redirect_to '/'
-  		flash[:error] = 'We did not receive any useful data from the Dwolla API. Please try again later.'
-  	end
+    if not (params.key?('code') || session[:req].is_a(Hash))
+      flash[:error] = 'We did not receive any useful data from the Dwolla API. Please try again later.'
+      redirect_to '/'
+    else
+      session[:req] = session[:req].except!(:scope)
+      session[:req][:grant_type] = 'authorization_code'
+      session[:req][:code] = params[:code]
 
-  	@@req = @@req.except!(:scope)
-  	@@req[:grant_type] = 'authorization_code'
-  	@@req[:code] = params[:code]
-  	@@req[:redirect_uri] = 'http://localhost:3000/redirect'
+      response = RestClient.post(session[:base_url] + '/token', session[:req])
+      response = JSON.pretty_generate(JSON.parse(response))
 
-  	@@authorization = RestClient.post(@@base_url + '/token', @@req.to_json)
-  	p @@authorization
-  	render 'home'
+	  session[:token] = "```js\n" + response
+
+      redirect_to '/'
+    end
   end
 end
