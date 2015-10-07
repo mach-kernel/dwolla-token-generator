@@ -17,7 +17,7 @@ class TokenController < ApplicationController
 
     dw_env = params[:commit] == 'Production'
     cred = params[:auth][:user_key].empty? || params[:auth][:user_secret].empty?
-    session[:base_url] = "https://#{dw_env ? 'dwolla.com' : 'uat.dwolla.com'}/oauth/v2"
+    session[:base_url] = "https://#{dw_env ? 'www.dwolla.com' : 'uat.dwolla.com'}/oauth/v2"
 
     scope = ""
 
@@ -44,7 +44,7 @@ class TokenController < ApplicationController
       session[:req] = session[:req].except!(:scope)
       session[:req][:grant_type] = 'authorization_code'
       session[:req][:code] = params[:code]
-
+      p session[:base_url]
       response = RestClient.post(session[:base_url] + '/token', session[:req])
       response = JSON.pretty_generate(JSON.parse(response))
 
