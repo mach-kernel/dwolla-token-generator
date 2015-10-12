@@ -29,7 +29,7 @@ class TokenController < ApplicationController
       :client_id => cred ? dw_env ? Rails.application.secrets.key_prod : Rails.application.secrets.key_uat : params[:auth][:user_key],
       :client_secret => cred ? dw_env ? Rails.application.secrets.sec_prod : Rails.application.secrets.sec_uat : params[:auth][:user_secret],
       :scope => scope[0..scope.length - 2],
-      #:response_type => 'code',
+      :response_type => 'code',
       :redirect_uri => Rails.application.secrets.redirect,
       :dwolla_landing => 'login'
     }
