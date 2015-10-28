@@ -18,18 +18,10 @@
 <%= form_for(:auth, :url => {:controller => 'token', :action => 'generate'}) do |f| %>
 <div class="row">
 	<div class="col-md-12">
-		<h3 class="page-header" id="step_1">Step 1: Select Credentials</h3>
+		<h3 class="page-header" id="step_1">Step 1: Set Credentials</h3>
 		<div class="text-center">
-			<h4>I want to...</h4>
 			<div id="example_creds">
-				<a class="btn alternative" id="user_creds_button">Use my own credentials</a>
-				<br />
-				<strong>&mdash; or &mdash;</strong>
-				<br /><br />
-				<a class="btn alternative" id="example_app_button" href="#step_2">Use the Dwolla example app credentials</a>
-			</div>
-			<div id="user_creds">
-				<a class="btn alternative" id="back_creds_button">Go Back</a>
+				<div id="user_creds">
 				<br /> <br />
 				<div class="col-md-6">
 					<%= f.text_field :user_key, :tabindex => 1, class: 'form-control', :placeholder => 'Application Key' %>
@@ -37,6 +29,11 @@
 				<div class="col-md-6">
 					<%= f.text_field :user_secret, :tabindex => 1, class: 'form-control', :placeholder => 'Application Secret' %>
 				</div>
+			</div>
+				<br />
+				<strong>&mdash; or &mdash;</strong>
+				<br /><br />
+				<a class="btn alternative" id="example_app_button" href="#step_2">Use the Dwolla example app credentials</a>
 			</div>
 		</div>
 	</div>

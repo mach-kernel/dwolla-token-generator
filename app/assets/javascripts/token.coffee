@@ -9,14 +9,6 @@ $(document).ready ->
       scrollTarget: link.hash
       speed: 200
     return
-  $('#user_creds_button').click ->
-    $('#user_creds').fadeIn()
-    $('#example_creds').css('display', 'none')
-    return
-  $('#back_creds_button').click ->
-    $('#user_creds').css('display', 'none')
-    $('#example_creds').fadeIn()
-    return
   $('#all_scopes_button').click ->
     table = $('#scope_table')
     $('td input:checkbox', table).prop('checked', true)
