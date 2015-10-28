@@ -18,7 +18,22 @@
 <%= form_for(:auth, :url => {:controller => 'token', :action => 'generate'}) do |f| %>
 <div class="row">
 	<div class="col-md-12">
-		<h3 class="page-header" id="step_1">Step 1: Set Credentials</h3>
+		<h3 class="page-header">Step 1: Select environment</h3>
+		<div class="text-center">
+			<h4>Generate token for which environment?</h4>
+			<br />
+			<div class="col-md-6">
+			<a class="btn btn-default btn-block" id="button-production">Production</a>
+			</div>
+			<div class="col-md-6">
+				<a class="btn btn-default btn-warning btn-block" id="button-sandbox">UAT/Sandbox</a>
+			</div>
+			<input type="hidden" name="environment" id="environment_toggle" value="sandbox">
+		</div>
+	</div>
+
+	<div class="col-md-12">
+		<h3 class="page-header" id="step_1">Step 2: Set credentials</h3>
 		<div class="text-center">
 			<div id="example_creds">
 				<div id="user_creds">
@@ -41,7 +56,7 @@
 </div>
 <div class="row">
 	<div class="col-md-12">
-		<h3 class="page-header" id="step_2">Step 2: Select Permissions</h3>
+		<h3 class="page-header" id="step_2">Step 3: Select Permissions</h3>
 		<a class="btn secondary" id="all_scopes_button">Select all</a>
 		<a class="btn clear--dark" id="no_scopes_button">Clear</a>
 		<table class="table table-striped table-hover table-bordered fields-list" id="scope_table">
@@ -110,17 +125,9 @@
 </div>
 <div class="row">
 	<div class="col-md-12">
-		<h3 class="page-header">Step 3: Generate Token</h3>
 		<div class="text-center">
-			<h4>Generate token for which environment?</h4>
-			<br />
-			<div class="col-md-6">
-				<%= f.submit 'Production', class: 'btn btn-success btn-block' %>
+				<%= f.submit 'Start OAuth', class: 'btn btn-success btn-block' %>
 			</div>
-			<div class="col-md-6">
-				<%= f.submit 'UAT/Sandbox', class: 'btn btn-warning btn-block' %>
-			</div>
-		</div>
 	</div>
 </div>
 <% end %>

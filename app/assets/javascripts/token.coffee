@@ -20,4 +20,14 @@ $(document).ready ->
   $('#again_button').click ->
     $('#token_box').fadeOut()
     return
+  $('#button-sandbox').click ->
+    $('#environment_toggle').val('sandbox')
+    $(this).addClass('btn-warning')
+    $('#button-production').removeClass('btn-success')
+    return
+  $('#button-production').click ->
+    $('#environment_toggle').val('production')
+    $(this).addClass('btn-success')
+    $('#button-sandbox').removeClass('btn-warning')
+    return
   return
