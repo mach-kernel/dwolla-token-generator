@@ -87,6 +87,10 @@ margin-top: 28px;
 	margin-bottom: 30px;
 }
 
+#generic-warning {
+  font-style: italic;
+}
+
 .highlight { background-color: #333333 }
 .highlight .c { color: #008800; font-style: italic; background-color: #0f140f } /* Comment */
 .highlight .err { color: #ffffff } /* Error */
