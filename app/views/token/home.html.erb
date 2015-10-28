@@ -13,15 +13,13 @@
 <% end %>
 
 <h1 class="page-header">Dwolla Token Generator</h1>
-<h4>Generate an authorization token using OAuth for the Dwolla API.</h4>
+<h4>Generate an OAuth access and refresh token pair using for the Dwolla API.</h4>
 
 <%= form_for(:auth, :url => {:controller => 'token', :action => 'generate'}) do |f| %>
 <div class="row">
 	<div class="col-md-12">
 		<h3 class="page-header">Step 1: Select environment</h3>
 		<div class="text-center">
-			<h4>Generate token for which environment?</h4>
-			<br />
 			<div class="col-md-6">
 			<a class="btn btn-default btn-block" id="button-production">Production</a>
 			</div>
@@ -34,10 +32,11 @@
 
 	<div class="col-md-12">
 		<h3 class="page-header" id="step_1">Step 2: Set credentials</h3>
+		<p>Before you can use this tool, be sure to add <code>https://dwolla-token.herokuapp.com/redirect</code> as one of your application's OAuth Redirect URLs in your application settings.</p>
 		<div class="text-center">
 			<div id="example_creds">
 				<div id="user_creds">
-				<br /> <br />
+				<br /> 
 				<div class="col-md-6">
 					<%= f.text_field :user_key, :tabindex => 1, class: 'form-control', :placeholder => 'Application Key' %>
 				</div>
