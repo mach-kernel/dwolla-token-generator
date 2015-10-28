@@ -30,4 +30,16 @@ $(document).ready ->
     $(this).addClass('btn-success')
     $('#button-sandbox').removeClass('btn-warning')
     return
+  $('#button-v2').click ->
+    $(this).addClass('btn-primary')
+    $('#button-v1').removeClass('btn-primary')
+    $('.v1-only').hide();
+    return
+  $('#button-v1').click ->
+    $(this).addClass('btn-primary')
+    $('#button-v2').removeClass('btn-primary')
+    $('.v1-only').show();
+    return
+
+  $('#button-v2').click();
   return

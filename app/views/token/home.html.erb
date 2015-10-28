@@ -53,6 +53,20 @@
 		</div>
 	</div>
 </div>
+
+<div class="row">
+	<div class="col-md-12">
+		<h3 class="page-header" id="step_2">Step 3: Select API Version</h3>
+			<div class="text-center">
+				<div class="col-md-6">
+					<a class="btn btn-default btn-block" id="button-v1">API V1</a>
+				</div>
+				<div class="col-md-6">
+					<a class="btn btn-default btn-primary btn-block" id="button-v2">API V2</a>
+				</div>
+		</div>
+	</div>
+</div>
 <div class="row">
 	<div class="col-md-12">
 		<h3 class="page-header" id="step_2">Step 3: Select Permissions</h3>
@@ -72,22 +86,22 @@
 					<td>Send</td>
 					<td>Send money from the authenticated account</td>
 				</tr>
-				<tr>
+				<tr class="v1-only">
 					<td><%= f.check_box :Scheduled, { checked: 0 } %></td>
 					<td>Scheduled</td>
 					<td>Allow scheduling one-time and recurring payments</td>
 				</tr>
-				<tr>
+				<tr class="v1-only">
 					<td><%= f.check_box :Request, { checked: 0 } %></td>
 					<td>Request</td>
 					<td>Initiate a money request, originating from the authenticated account. View, cancel, and fulfill existing requests</td>
 				</tr>
-				<tr>
+				<tr class="v1-only">
 					<td><%= f.check_box :AccountInfoFull, { checked: 0 } %></td>
 					<td>AccountInfoFull</td>
 					<td>Detailed information about the authenticated account</td>
 				</tr>
-				<tr>
+				<tr class="v1-only">
 					<td><%= f.check_box :Contacts, { checked: 0 } %></td>
 					<td>Contacts</td>
 					<td>Contacts of the authenticated account</td>
@@ -97,7 +111,7 @@
 					<td>Transactions</td>
 					<td>List and retrieve user's transactions</td>
 				</tr>
-				<tr>
+				<tr class="v1-only">
 					<td><%= f.check_box :Balance, { checked: 0 } %></td>
 					<td>Balance</td>
 					<td>Dwolla balance of the authenticated account</td>
@@ -107,7 +121,7 @@
 					<td>Funding</td>
 					<td>View, add, verify funding sources (i.e. bank accounts) linked to the authenticated account. Initiate deposits from and withdrawals to funding sources</td>
 				</tr>
-				<tr>
+				<tr class="v1-only">
 					<td><%= f.check_box :ManageAccount, { checked: 0 } %></td>
 					<td>ManageAccount</td>
 					<td>Manage the authenticated user's account settings</td>
