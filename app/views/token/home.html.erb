@@ -1,6 +1,3 @@
-<h1 class="page-header">Dwolla Token Generator</h1>
-<h4>Generate an authorization token using OAuth for the Dwolla API.</h4>
-
 <% if @token %>
 <div class="row" id="token_box">
 	<div class="col-md-1"></div>
@@ -14,6 +11,9 @@
 	<div class="col-md-1"></div>
 </div>
 <% end %>
+
+<h1 class="page-header">Dwolla Token Generator</h1>
+<h4>Generate an authorization token using OAuth for the Dwolla API.</h4>
 
 <%= form_for(:auth, :url => {:controller => 'token', :action => 'generate'}) do |f| %>
 <div class="row">
