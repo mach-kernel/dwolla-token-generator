@@ -12,6 +12,7 @@ Rails.application.config.assets.version = '1.0'
 
 # CSS
 Rails.application.config.assets.precompile += %w( dwolla.css )
+Rails.application.config.assets.precompile += %w( developer.css )
 
 # JavaScript
 Rails.application.config.assets.precompile += %w( token.js )
