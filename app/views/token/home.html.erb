@@ -1,6 +1,6 @@
 <div class="cnt-one-col">
   <h2>Dwolla Token Generator</h1>
-  <p>Generate an OAuth access and refresh token pair using for the Dwolla API.</p>
+  <p>Generate an OAuth access and refresh token pair for the Dwolla API.</p>
 
   <% if @token %>
 	<div class="code-snippet js-code-snippet">
@@ -89,6 +89,7 @@
           <%= f.check_box :Funding, { checked: 0 } %>
           <label for="auth_Funding"><span>Funding</span></label>
         </li>
+        <li class="v1-only">
           <%= f.check_box :ManageAccount, { checked: 0 } %>
           <label for="auth_ManageAccount"><span>ManageAccount</span></label>
         </li>
