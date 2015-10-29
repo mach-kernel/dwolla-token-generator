@@ -84,7 +84,11 @@ margin-top: 28px;
 }
 
 #user_creds {
-	display: none;
+	margin-bottom: 30px;
+}
+
+#generic-warning {
+  font-style: italic;
 }
 
 .highlight { background-color: #333333 }

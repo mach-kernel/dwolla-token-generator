@@ -1,127 +1,111 @@
-<h1 class="page-header">Dwolla Token Generator</h1>
-<h4>Generate an authorization token using OAuth for the Dwolla API.</h4>
+<div class="cnt-one-col">
+  <h2>Dwolla Token Generator</h1>
+  <p>Generate an OAuth access and refresh token pair using for the Dwolla API.</p>
 
-<% if @token %>
-<div class="row" id="token_box">
-	<div class="col-md-1"></div>
-	<div class="col-md-10">
-		<h3 class="page-header">Your access key set</h3>
-		<p><%== Parser.md.render(@token).html_safe %></p>
-		<div class="text-center">
-			<a class="btn btn-primary" id="again_button">Again?</a>
-		</div>
+  <% if @token %>
+	<div class="code-snippet js-code-snippet">
+	    <div class="code-snippet__cnt">
+	        <pre class="language-json"><%== Parser.md.render(@token).html_safe %></pre>
+	    </div>
 	</div>
-	<div class="col-md-1"></div>
-</div>
-<% end %>
+	<% end %>
 
-<%= form_for(:auth, :url => {:controller => 'token', :action => 'generate'}) do |f| %>
-<div class="row">
-	<div class="col-md-12">
-		<h3 class="page-header" id="step_1">Step 1: Select Credentials</h3>
-		<div class="text-center">
-			<h4>I want to...</h4>
-			<div id="example_creds">
-				<a class="btn alternative" id="user_creds_button">Use my own credentials</a>
-				<br />
-				<strong>&mdash; or &mdash;</strong>
-				<br /><br />
-				<a class="btn alternative" id="example_app_button" href="#step_2">Use the Dwolla example app credentials</a>
-			</div>
-			<div id="user_creds">
-				<a class="btn alternative" id="back_creds_button">Go Back</a>
-				<br /> <br />
-				<div class="col-md-6">
-					<%= f.text_field :user_key, :tabindex => 1, class: 'form-control', :placeholder => 'Application Key' %>
-				</div>
-				<div class="col-md-6">
-					<%= f.text_field :user_secret, :tabindex => 1, class: 'form-control', :placeholder => 'Application Secret' %>
-				</div>
-			</div>
-		</div>
-	</div>
+  <section class="hover-box">
+    <%= form_for(:auth, :url => {:controller => 'token', :action => 'generate'}) do |f| %>
+
+    <section class="split-options">
+      <h3 class="page-header">Step 1: Select environment</h3>
+      <div>
+        <a class="btn clear--dark" id="button-production">Production</a>
+      </div>
+      <div>
+        <a class="btn clear--dark" id="button-sandbox">UAT/Sandbox</a>
+      </div>
+      <input type="hidden" name="environment" id="environment_toggle" value="sandbox">
+    </section>
+
+    <section>
+      <h3 id="step_1">Step 2: Set credentials</h3>
+      <ul class="fields-list js-infield-label">
+        <li>
+            <%= f.text_field :user_key, :tabindex => 1, class: 'form-control', :placeholder => 'Application Key' %>
+        </li>
+        <li>
+            <%= f.text_field :user_secret, :tabindex => 1, class: 'form-control', :placeholder => 'Application Secret' %>
+        </li>
+        <li>
+        <br>
+          <input type="checkbox" id="generic-credentials-checkbox">
+          <label for="generic-credentials-checkbox"><span>Use example app credentials instead (note: you won't be able to refresh your token)</span></label>
+        </li>
+      </ul>
+    </section>
+
+    <section class="split-options">
+      <h3 class="page-header">Step 3: Select API Version</h3>
+      <div>
+        <a class="btn clear--dark" id="button-v1">API V1</a>
+      </div>
+      <div>
+        <a class="btn clear--dark" id="button-v2">API V2</a>
+      </div>
+    </section>
+
+    <section>
+      <h3 class="page-header" id="step_2">Step 4: Select Permissions</h3>
+      <a class="btn secondary" id="all_scopes_button">Select all</a>
+      <a class="btn clear--dark" id="no_scopes_button">Clear</a>
+
+      <ul class="fields-list" id="scopes-list">
+        <li>
+          <%= f.check_box :Send, { checked: 0 } %>
+          <label for="auth_Send"><span>Send</span></label>
+        </li>
+        <li class="v1-only">
+          <%= f.check_box :Scheduled, { checked: 0 } %>
+          <label for="auth_Scheduled"><span>Scheduled</span></label>
+        </li>
+        <li class="v1-only">
+          <%= f.check_box :Request, { checked: 0 } %>
+          <label for="auth_Request"><span>Request</span></label>
+        </li>
+        <li class="v1-only">
+          <%= f.check_box :AccountInfoFull, { checked: 0 } %>
+          <label for="auth_AccountInfoFull"><span>AccountInfoFull</span></label>
+        </li>
+        <li class="v1-only">
+          <%= f.check_box :Contacts, { checked: 0 } %>
+          <label for="auth_Contacts"><span>Contacts</span></label>
+        </li>
+        <li>
+          <%= f.check_box :Transactions, { checked: 0 } %>
+          <label for="auth_Transactions"><span>Transactions</span></label>
+        </li>
+        <li class="v1-only">
+          <%= f.check_box :Balance, { checked: 0 } %>
+          <label for="auth_Balance"><span>Balance</span></label>
+        </li>
+        <li>
+          <%= f.check_box :Funding, { checked: 0 } %>
+          <label for="auth_Funding"><span>Funding</span></label>
+        </li>
+          <%= f.check_box :ManageAccount, { checked: 0 } %>
+          <label for="auth_ManageAccount"><span>ManageAccount</span></label>
+        </li>
+        <li>
+          <%= f.check_box :ManageCustomers, { checked: 0 } %>
+          <label for="auth_ManageCustomers"><span>ManageCustomers</span></label>
+        </li>
+   
+      </ul>
+    </section>
+      
+  <section>
+    <%= f.submit 'Start OAuth', class: 'btn large alternative', :id => 'submit' %>
+  </section>
+  <% end %> 
+</section>
+
+  
 </div>
-<div class="row">
-	<div class="col-md-12">
-		<h3 class="page-header" id="step_2">Step 2: Select Permissions</h3>
-		<table class="table table-striped table-hover table-bordered fields-list" id="scope_table">
-			<thead>
-				<tr>
-					<th></th>
-					<th>Scope</th>
-					<th>Description</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td><%= f.check_box :Send, { checked: 0 } %></td>
-					<td>Send</td>
-					<td>Send money from the authenticated account</td>
-				</tr>
-				<tr>
-					<td><%= f.check_box :Scheduled, { checked: 0 } %></td>
-					<td>Scheduled</td>
-					<td>Allow scheduling one-time and recurring payments</td>
-				</tr>
-				<tr>
-					<td><%= f.check_box :Request, { checked: 0 } %></td>
-					<td>Request</td>
-					<td>Initiate a money request, originating from the authenticated account. View, cancel, and fulfill existing requests</td>
-				</tr>
-				<tr>
-					<td><%= f.check_box :AccountInfoFull, { checked: 0 } %></td>
-					<td>AccountInfoFull</td>
-					<td>Detailed information about the authenticated account</td>
-				</tr>
-				<tr>
-					<td><%= f.check_box :Contacts, { checked: 0 } %></td>
-					<td>Contacts</td>
-					<td>Contacts of the authenticated account</td>
-				</tr>
-				<tr>
-					<td><%= f.check_box :Transactions, { checked: 0 } %></td>
-					<td>Transactions</td>
-					<td>List and retrieve user's transactions</td>
-				</tr>
-				<tr>
-					<td><%= f.check_box :Balance, { checked: 0 } %></td>
-					<td>Balance</td>
-					<td>Dwolla balance of the authenticated account</td>
-				</tr>
-				<tr>
-					<td><%= f.check_box :Funding, { checked: 0 } %></td>
-					<td>Funding</td>
-					<td>View, add, verify funding sources (i.e. bank accounts) linked to the authenticated account. Initiate deposits from and withdrawals to funding sources</td>
-				</tr>
-				<tr>
-					<td><%= f.check_box :ManageAccount, { checked: 0 } %></td>
-					<td>ManageAccount</td>
-					<td>Manage the authenticated user's account settings</td>
-				</tr>
-				<tr>
-					<td><%= f.check_box :ManageCustomers, { checked: 0 } %></td>
-					<td>ManageCustomers <em>(beta)</em></td>
-					<td>Manage customer records associated with the authenticated user's account</td>
-				</tr>
-			</tbody>
-		</table>
-		<a class="btn secondary" id="all_scopes_button">Select all</a>
-		<a class="btn clear--dark" id="no_scopes_button">Clear</a>
-	</div>
-</div>
-<div class="row">
-	<div class="col-md-12">
-		<h3 class="page-header">Step 3: Generate Token</h3>
-		<div class="text-center">
-			<h4>Generate token for which environment?</h4>
-			<br />
-			<div class="col-md-6">
-				<%= f.submit 'Production', class: 'btn btn-success btn-block' %>
-			</div>
-			<div class="col-md-6">
-				<%= f.submit 'UAT/Sandbox', class: 'btn btn-warning btn-block' %>
-			</div>
-		</div>
-	</div>
-</div>
-<% end %>
+

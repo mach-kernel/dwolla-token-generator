@@ -10,13 +10,13 @@ class TokenController < ApplicationController
   end
 
   def generate
-    unless ['Production', 'UAT/Sandbox'].include? params[:commit]
-      redirect_to '/'
+    unless ['production', 'sandbox'].include? params[:environment]
       flash[:error] = 'Something went wrong. Please try again?'
+      return redirect_to '/'
     end
 
-    dw_env = params[:commit] == 'Production'
-    cred = params[:auth][:user_key].empty? || params[:auth][:user_secret].empty?
+    dw_env = params[:environment] == 'production'
+    cred = params[:auth][:user_key].blank? || params[:auth][:user_secret].blank?
     session[:base_url] = "https://#{dw_env ? 'www.dwolla.com' : 'uat.dwolla.com'}/oauth/v2"
 
     scope = ""
