@@ -22,30 +22,22 @@ $(document).ready ->
     return
   $('#button-sandbox').click ->
     $('#environment_toggle').val('sandbox')
-    $(this).addClass('secondary')
-    $(this).removeClass('clear--dark')
-    $('#button-production').removeClass('secondary')
-    $('#button-production').addClass('clear--dark')
+    $(this).addClass('active')
+    $('#button-production').removeClass('active')
     return
   $('#button-production').click ->
     $('#environment_toggle').val('production')
-    $(this).addClass('secondary')
-    $(this).removeClass('clear--dark')
-    $('#button-sandbox').removeClass('secondary')
-    $('#button-sandbox').addClass('clear--dark')
+    $(this).addClass('active')
+    $('#button-sandbox').removeClass('active')
     return
   $('#button-v2').click ->
-    $(this).addClass('secondary')
-    $(this).removeClass('clear--dark')
-    $('#button-v1').removeClass('secondary')
-    $('#button-v1').addClass('clear--dark')
+    $(this).addClass('active')
+    $('#button-v1').removeClass('active')
     $('.v1-only').hide();
     return
   $('#button-v1').click ->
-    $(this).addClass('secondary')
-    $(this).removeClass('clear--dark')
-    $('#button-v2').removeClass('secondary')
-    $('#button-v2').addClass('clear--dark')
+    $(this).addClass('active')
+    $('#button-v2').removeClass('active')
     $('.v1-only').show();
     return
 
