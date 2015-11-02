@@ -26,6 +26,9 @@
 
     <section>
       <h3 id="step_1">Step 2: Set credentials</h3>
+      <ol class="alerts">
+        <li class="information icon-alert-info" style="text-align: left;"><strong>Before you can use this tool,</strong> be sure to add <code>https://dwolla-token.herokuapp.com/redirect</code> as one of your application's OAuth Redirect URLs in your application settings.</a></li>
+    </ol>
       <ul class="fields-list js-infield-label">
         <li>
             <%= f.text_field :user_key, :tabindex => 1, class: 'form-control', :placeholder => 'Application Key' %>
