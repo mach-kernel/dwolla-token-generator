@@ -3,12 +3,6 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $(document).ready ->
-  $('#example_app_button').smoothScroll()
-  $('#example_app_button a').click ->
-    $.smoothScroll
-      scrollTarget: link.hash
-      speed: 200
-    return
   $('#all_scopes_button').click ->
     list = $('#scopes-list')
     $('input:checkbox', list).prop('checked', true)
@@ -52,15 +46,13 @@ $(document).ready ->
   $('#generic-credentials-checkbox').change ->
     if $(this).is(':checked')
       saveCreds()
-      $('#auth_user_key').attr('disabled', true)
-      $('#auth_user_secret').attr('disabled', true)
+      $('#custom-credentials-section').slideUp();
       $('#auth_user_key').val('')
       $('#auth_user_secret').val('')
+      
     else
       retrieveCreds()
-      $('#auth_user_key').attr('disabled', false)
-      $('#auth_user_secret').attr('disabled', false)
-      
+      $('#custom-credentials-section').slideDown();
 
   $('#submit').click -> 
     if $('#auth_user_key').val().length != 0 && $('#auth_user_secret').val().length != 0
