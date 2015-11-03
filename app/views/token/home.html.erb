@@ -13,48 +13,54 @@
   <section class="hover-box">
     <%= form_for(:auth, :url => {:controller => 'token', :action => 'generate'}) do |f| %>
 
-    <section class="split-options">
+    <section>
       <h3 class="page-header">Step 1: Select environment</h3>
-      <div>
-        <a class="btn clear--dark" id="button-production">Production</a>
-      </div>
-      <div>
-        <a class="btn clear--dark" id="button-sandbox">UAT/Sandbox</a>
+      <div class="toggle-buttons">
+        <a id="button-production">Production</a>
+        <a class="active" id="button-sandbox">UAT/Sandbox</a>
       </div>
       <input type="hidden" name="environment" id="environment_toggle" value="sandbox">
     </section>
 
     <section>
       <h3 id="step_1">Step 2: Set credentials</h3>
-      <ul class="fields-list js-infield-label">
+      <div id="custom-credentials-section">
+        <ol class="alerts" id="warnings">
+          <li class="information icon-alert-info" style="text-align: left;"><strong>Before you can use this tool,</strong> be sure to add <code>https://dwolla-token.herokuapp.com/redirect</code> as one of your application's OAuth Redirect URLs in your application settings.</a></li>
+        </ol>
+
+        <ul class="fields-list js-infield-label">
         <li>
             <%= f.text_field :user_key, :tabindex => 1, class: 'form-control', :placeholder => 'Application Key' %>
         </li>
         <li>
             <%= f.text_field :user_secret, :tabindex => 1, class: 'form-control', :placeholder => 'Application Secret' %>
         </li>
+        </ul>
+      </div>
+      
+      <br>
+      <ul class="fields-list js-infield-label">
         <li>
-        <br>
           <input type="checkbox" id="generic-credentials-checkbox">
           <label for="generic-credentials-checkbox"><span>Use example app credentials instead (note: you won't be able to refresh your token)</span></label>
         </li>
       </ul>
+      <br>
     </section>
 
-    <section class="split-options">
+    <section>
       <h3 class="page-header">Step 3: Select API Version</h3>
-      <div>
-        <a class="btn clear--dark" id="button-v1">API V1</a>
-      </div>
-      <div>
-        <a class="btn clear--dark" id="button-v2">API V2</a>
+      <div class="toggle-buttons">
+        <a id="button-v1">Production</a>
+        <a class="active" id="button-v2">UAT/Sandbox</a>
       </div>
     </section>
 
     <section>
       <h3 class="page-header" id="step_2">Step 4: Select Permissions</h3>
-      <a class="btn secondary" id="all_scopes_button">Select all</a>
-      <a class="btn clear--dark" id="no_scopes_button">Clear</a>
+      <a class="btn alternative" id="all_scopes_button">Select all</a>
+      <a class="btn alternative" id="no_scopes_button">Clear</a>
 
       <ul class="fields-list" id="scopes-list">
         <li>

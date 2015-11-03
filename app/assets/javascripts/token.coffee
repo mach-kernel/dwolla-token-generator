@@ -3,12 +3,6 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $(document).ready ->
-  $('#example_app_button').smoothScroll()
-  $('#example_app_button a').click ->
-    $.smoothScroll
-      scrollTarget: link.hash
-      speed: 200
-    return
   $('#all_scopes_button').click ->
     list = $('#scopes-list')
     $('input:checkbox', list).prop('checked', true)
@@ -22,30 +16,22 @@ $(document).ready ->
     return
   $('#button-sandbox').click ->
     $('#environment_toggle').val('sandbox')
-    $(this).addClass('secondary')
-    $(this).removeClass('clear--dark')
-    $('#button-production').removeClass('secondary')
-    $('#button-production').addClass('clear--dark')
+    $(this).addClass('active')
+    $('#button-production').removeClass('active')
     return
   $('#button-production').click ->
     $('#environment_toggle').val('production')
-    $(this).addClass('secondary')
-    $(this).removeClass('clear--dark')
-    $('#button-sandbox').removeClass('secondary')
-    $('#button-sandbox').addClass('clear--dark')
+    $(this).addClass('active')
+    $('#button-sandbox').removeClass('active')
     return
   $('#button-v2').click ->
-    $(this).addClass('secondary')
-    $(this).removeClass('clear--dark')
-    $('#button-v1').removeClass('secondary')
-    $('#button-v1').addClass('clear--dark')
+    $(this).addClass('active')
+    $('#button-v1').removeClass('active')
     $('.v1-only').hide();
     return
   $('#button-v1').click ->
-    $(this).addClass('secondary')
-    $(this).removeClass('clear--dark')
-    $('#button-v2').removeClass('secondary')
-    $('#button-v2').addClass('clear--dark')
+    $(this).addClass('active')
+    $('#button-v2').removeClass('active')
     $('.v1-only').show();
     return
 
@@ -60,15 +46,13 @@ $(document).ready ->
   $('#generic-credentials-checkbox').change ->
     if $(this).is(':checked')
       saveCreds()
-      $('#auth_user_key').attr('disabled', true)
-      $('#auth_user_secret').attr('disabled', true)
+      $('#custom-credentials-section').slideUp();
       $('#auth_user_key').val('')
       $('#auth_user_secret').val('')
+      
     else
       retrieveCreds()
-      $('#auth_user_key').attr('disabled', false)
-      $('#auth_user_secret').attr('disabled', false)
-      
+      $('#custom-credentials-section').slideDown();
 
   $('#submit').click -> 
     if $('#auth_user_key').val().length != 0 && $('#auth_user_secret').val().length != 0
