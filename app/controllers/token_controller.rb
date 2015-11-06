@@ -34,7 +34,7 @@ class TokenController < ApplicationController
       :dwolla_landing => 'login'
     }
 
-    redirect_to(session[:base_url] + '/authenticate?' + session[:req].to_query)
+    redirect_to(session[:base_url] + '/authenticate?' + session[:req].except(:client_secret).to_query)
   end
 
   def redirect
@@ -49,7 +49,7 @@ class TokenController < ApplicationController
       response = RestClient.post(session[:base_url] + '/token', session[:req])
       response = JSON.pretty_generate(JSON.parse(response))
 
-	  session[:token] = "```js\n" + response
+	    session[:token] = "```js\n" + response
 
       redirect_to '/'
     end
