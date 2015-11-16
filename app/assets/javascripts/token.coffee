@@ -28,11 +28,13 @@ $(document).ready ->
     $(this).addClass('active')
     $('#button-v1').removeClass('active')
     $('.v1-only').hide();
+    $('.v2-only').show();
     return
   $('#button-v1').click ->
     $(this).addClass('active')
     $('#button-v2').removeClass('active')
     $('.v1-only').show();
+    $('.v2-only').hide();
     return
 
   saveCreds = () -> 
