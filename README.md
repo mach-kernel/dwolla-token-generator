@@ -1,7 +1,5 @@
 # dwolla-token-generator
-A quickstart tutorial application written in Rails 4+ illustrating an example `dwolla.js` implementation.
-
-Syntax highlighting done via [redcarpet](https://github.com/vmg/redcarpet) and [rouge](https://github.com/jneen/rouge).
+The new Dwolla OAuth token generator, powered by [rest-client](https://github.com/rest-client/rest-client), [redcarpet](https://github.com/vmg/redcarpet) and [rouge](https://github.com/jneen/rouge).
 
 ![Ooh! Pretty!](http://puu.sh/m0gb9/641508ebbf.png)
 
